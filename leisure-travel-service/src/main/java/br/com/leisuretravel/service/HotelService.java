@@ -26,8 +26,9 @@ public class HotelService {
 	public List<Hotel> getHotelsByCityId(String cityId) {
 		
 		  List<HotelResource> hotelsResource =
-		  client.getHoteisPorCidade(cityId).getBody(); List<Hotel> entities =
-		  assembler.toEntities(hotelsResource); repository.saveAll(entities);
+		  client.getHoteisPorCidade(cityId).getBody(); 
+		  List<Hotel> entities = assembler.toEntities(hotelsResource); 
+		  repository.saveAll(entities);
 		  
 		  return (List<Hotel>) repository.findAll();
 	}
