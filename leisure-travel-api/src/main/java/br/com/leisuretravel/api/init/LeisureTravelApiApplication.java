@@ -11,7 +11,7 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 //								"br.com.leisuretravel.api.controller",
 //								"br.com.leisuretravel.assembler"})					
 @EnableRedisRepositories(basePackages = { "br.com.leisuretravel.repository.nosql.redis" })
-@ComponentScan(basePackages = {"br.com.leisuretravel.api.controller", "br.com.leisuretravel.service.HotelService"})
+@ComponentScan(basePackages = {"br.com.leisuretravel.api.controller"})
 public class LeisureTravelApiApplication {
 
 	public static void main(String[] args) {
