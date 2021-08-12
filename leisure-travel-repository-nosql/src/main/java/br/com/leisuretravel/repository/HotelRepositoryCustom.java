@@ -1,4 +1,4 @@
-package br.com.leisuretravel.repository.nosql.redis;
+package br.com.leisuretravel.repository;
 
 import br.com.leisuretravel.model.hotels.city.Hotel;
 
