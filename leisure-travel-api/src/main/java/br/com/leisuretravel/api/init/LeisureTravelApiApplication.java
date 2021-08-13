@@ -14,8 +14,12 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 
-@SpringBootApplication//(scanBasePackages =  "br.com.leisuretravel.api.controller")
-//@EnableFeignClients(basePackages = { "br.com.leisuretravel.cvcbackendhotel.client" })
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+
+@SpringBootApplication
 @ComponentScan(basePackages = {"br.com.leisuretravel.api.controller", 
 							   "br.com.leisuretravel.service",  
 							   "br.com.leisuretravel.assembler",
@@ -26,6 +30,15 @@ public class LeisureTravelApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LeisureTravelApiApplication.class, args);
 	}
+	
+	@Bean
+    public Docket api() { 
+        return new Docket(DocumentationType.SWAGGER_2)  
+          .select()                                  
+          .apis(RequestHandlerSelectors.any())              
+          .paths(PathSelectors.any())                          
+          .build();                                           
+    }
 	
 	@Autowired
 	private RedisConnectionFactory redisConnectionFactory;

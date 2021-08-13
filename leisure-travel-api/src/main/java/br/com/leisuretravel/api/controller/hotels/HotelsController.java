@@ -19,9 +19,13 @@ import br.com.leisuretravel.assembler.HotelAssembler;
 import br.com.leisuretravel.canonical.hotels.city.HotelResource;
 import br.com.leisuretravel.model.hotels.city.Hotel;
 import br.com.leisuretravel.service.HotelService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/hotels")
+@Api(tags = {"Leisure Travel API"})
 public class HotelsController {
 	
 	@Autowired
@@ -30,25 +34,42 @@ public class HotelsController {
 	@Autowired
 	private HotelAssembler assembler;
 	
+	@ApiOperation(value = "Efetua uma busca pelo código da cidade.", 
+                  response = HotelResource.class)
 	@GetMapping(value = "/city/{cityId}", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<HotelResource>> getHotels(@PathVariable(value = "cityId") String cityId,
-														 @RequestHeader(value = "checkInDate") @DateTimeFormat(pattern = "yyyy-MM-dd") DateTime checkInDate, 
+	public ResponseEntity<List<HotelResource>> getHotelsByCityId(
+													     @ApiParam(name = "cityId", type = "String", value = "Código da cidade", required = true)
+														 @PathVariable(value = "cityId") String cityId,
+														 @ApiParam(name = "checkInDate", type = "Date", value = "Data de CheckIn", required = true)
+														 @RequestHeader(value = "checkInDate") @DateTimeFormat(pattern = "yyyy-MM-dd") DateTime checkInDate,
+														 @ApiParam(name = "checkOutDate", type = "Date", value = "Data de CheckOut", required = true)
 														 @RequestHeader(value = "checkOutDate") @DateTimeFormat(pattern = "yyyy-MM-dd") DateTime checkOutDate,
+														 @ApiParam(name = "numberOfAdults", type = "String", value = "Quantidade de adultos", required = true)
 														 @RequestHeader(value = "numberOfAdults") int numberOfAdults,
+														 @ApiParam(name = "numberOfChildren", type = "String", value = "Quantidade de crianças", required = true)
 														 @RequestHeader(value = "numberOfChildren") int numberOfChildren){
 		List<Hotel> entities = service.getHotelsByCityId(cityId, checkInDate, checkOutDate, numberOfAdults, numberOfChildren);
 		
 		return ok().body(assembler.toResources(entities));
 	}
 	
-	@GetMapping
-	public ResponseEntity<String> getTeste(){
-		Hotel hotel = new Hotel();
-		hotel.setCityCode(15);
-		hotel.setCityName("Sorocaba");
-		hotel.setName("SorocabaPark");
-		hotel.setId(1);
-        service.save(hotel);		
-		return ok().body("Olá");
+	@ApiOperation(value = "Efetua uma buasca pelo código do hotel.", 
+            response = HotelResource.class)
+	@GetMapping(value = "/{hotelId}", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<HotelResource> getByHotelId(
+													     @ApiParam(name = "hotelId", type = "String", value = "Código do hotel", required = true)
+													     @PathVariable(value = "hotelId") String hotelId,
+														 @ApiParam(name = "checkInDate", type = "Date", value = "Data de CheckIn", required = true)
+														 @RequestHeader(value = "checkInDate") @DateTimeFormat(pattern = "yyyy-MM-dd") DateTime checkInDate,
+														 @ApiParam(name = "checkOutDate", type = "Date", value = "Data de CheckOut", required = true)
+														 @RequestHeader(value = "checkOutDate") @DateTimeFormat(pattern = "yyyy-MM-dd") DateTime checkOutDate,
+														 @ApiParam(name = "numberOfAdults", type = "String", value = "Quantidade de adultos", required = true)
+														 @RequestHeader(value = "numberOfAdults") int numberOfAdults,
+														 @ApiParam(name = "numberOfChildren", type = "String", value = "Quantidade de crianças", required = true)
+														 @RequestHeader(value = "numberOfChildren") int numberOfChildren){
+		Hotel entity = service.getByHotelId(hotelId, checkInDate, checkOutDate, numberOfAdults, numberOfChildren);
+		
+		return ok().body(assembler.toResource(entity));
 	}
+	
 }

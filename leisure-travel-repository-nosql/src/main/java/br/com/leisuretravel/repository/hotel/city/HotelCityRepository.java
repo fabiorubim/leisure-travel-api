@@ -1,4 +1,4 @@
-package br.com.leisuretravel.repository;
+package br.com.leisuretravel.repository.hotel.city;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.leisuretravel.model.hotels.city.Hotel;
 
 @Repository
-public interface HotelRepository  extends CrudRepository<Hotel, String> {
+public interface HotelCityRepository  extends CrudRepository<Hotel, String> {
 
 }

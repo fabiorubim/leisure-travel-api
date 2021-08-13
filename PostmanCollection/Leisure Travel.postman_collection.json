@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "c1be2090-f194-4e84-808e-76fbab5aa61e",
+		"name": "Leisure Travel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hoteis Cidade",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "checkInDate",
+						"value": "2021-10-04",
+						"type": "text"
+					},
+					{
+						"key": "checkOutDate",
+						"value": "2021-10-10",
+						"type": "text"
+					},
+					{
+						"key": "numberOfAdults",
+						"value": "2",
+						"type": "text"
+					},
+					{
+						"key": "numberOfChildren",
+						"value": "0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/hotels/city/1032",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hotels",
+						"city",
+						"1032"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hotel Especifico",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "checkInDate",
+						"value": "2021-10-04",
+						"type": "text"
+					},
+					{
+						"key": "checkOutDate",
+						"value": "2021-10-10",
+						"type": "text"
+					},
+					{
+						"key": "numberOfAdults",
+						"value": "2",
+						"type": "text"
+					},
+					{
+						"key": "numberOfChildren",
+						"value": "0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/hotels/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hotels",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
